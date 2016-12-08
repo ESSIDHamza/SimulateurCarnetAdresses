@@ -1,0 +1,31 @@
+app_homepage :
+    path : /
+    defaults :
+        _controller : FrameworkBundle:Template:template
+        template :    index.html
+
+app_view :
+    path : /utilisateurs/retrieve/{id}
+    defaults : {_controller : AppBundle:Carnet:retrieve}
+    requirements :
+        id : \d+
+
+app_add :
+    path : /utilisateurs
+    defaults : {_controller : AppBundle:Carnet:create}
+
+app_edit :
+    path : /utilisateurs/update/{id}
+    defaults : {_controller : AppBundle:Carnet:update}
+    requirements :
+        id : \d+
+
+app_delete :
+    path : /utilisateurs/delete/{id}
+    defaults : {_controller : AppBundle:Carnet:delete}
+    requirements :
+        id : \d+
+
+app_view_all :
+    path : /utilisateurs/all
+    defaults : {_controller : AppBundle:Carnet:getAll}

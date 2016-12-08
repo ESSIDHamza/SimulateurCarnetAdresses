@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html ng-app="mon-application">
+<head>
+<meta charset="UTF-8" />
+<title>Carnet d'adresses</title>
+<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+<link rel="stylesheet" href="assets/css/animate.css" />
+</head>
+<body>
+	<div class="container" ng-controller="monControleur">
+		<div class="page-header">
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<h1>Carnet d'Adresses</h1>
+				</div>
+			</div>
+		</div>
+		<div class="row" style="background-color: #F9F9F9">
+			<div class="col-md-12">
+				<form name="ajoutContactForm" ng-submit="ajouter ()">
+					<br/>
+					<div class="row">
+						<div class="col-md-4">
+							<div class="form-group">
+								<label for="nom">Nom :</label> <input type="text"
+									class="form-control" id="nom" name="nom" ng-model="nom"
+									required /> <span
+									ng-show="ajoutContactForm.nom.$dirty && ajoutContactForm.nom.$error.required"
+									style="color: red">Veuillez saisir votre nom !</span>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label for="prenom">Prénom :</label> <input type="text"
+									class="form-control" id="prenom" name="prenom"
+									ng-model="prenom" required /> <span
+									ng-show="ajoutContactForm.prenom.$dirty && ajoutContactForm.prenom.$error.required"
+									style="color: red">Veuillez saisir votre prénom !</span>
+							</div>
+						</div>
+						<br/>
+						<div class="col-md-4">
+							<div class="input-group">
+								<span class="input-group-addon glyphicon glyphicon-envelope"></span><input
+									type="email" class="form-control" id="mail" name="mail" placeholder="E-mail"
+									ng-model="mail" required /> <span
+									ng-show="ajoutContactForm.mail.$dirty && ajoutContactForm.mail.$error.required"
+									style="color: red">Veuillez saisir votre e-mail !</span>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4">
+							<div class="input-group">
+								<span class="input-group-addon glyphicon glyphicon-home"></span><input type="text"
+									class="form-control" id="adresse" name="adresse" placeholder="Adresse" ng-model="adresse"
+									required /> <span
+									ng-show="ajoutContactForm.adresse.$dirty && ajoutContactForm.adresse.$error.required"
+									style="color: red">Veuillez saisir votre adresse !</span>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="input-group">
+								<span class="input-group-addon glyphicon glyphicon-phone"></span><input type="text"
+									class="form-control" id="tel" name="tel" placeholder="Numéro de téléphone"
+									ng-model="tel" required /> <span
+									ng-show="ajoutContactForm.tel.$dirty && ajoutContactForm.tel.$error.required"
+									style="color: red">Veuillez saisir votre numéro de téléphone !</span>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="input-group">
+								<span class="input-group-addon glyphicon glyphicon-globe"></span><input
+									type="text" class="form-control" id="siteWeb" name="siteWeb" placeholder="Site Web"
+									ng-model="siteWeb" required /> <span
+									ng-show="ajoutContactForm.siteWeb.$dirty && ajoutContactForm.siteWeb.$error.required"
+									style="color: red">Veuillez saisir votre site Web !</span>
+							</div>
+						</div>
+					</div>
+					<br/>
+					<div class="row">
+						<div class="col-md-12 text-center">
+							<input type="submit" value="Ajouter" class="btn btn-success"
+								ng-disabled="ajoutContactForm.$invalid" /> <input type="reset"
+								value="Annuler" class="btn btn-danger" />
+						</div>
+					</div>
+					<br/>
+				</form>
+			</div>
+		</div>
+		<hr />
+		<div class="row animated fadeInDown" style="background-color: #F9F9F9"
+			ng-show="existeModification">
+			<div class="col-md-12">
+				<form name="modifContactForm" ng-submit="modifier ()">
+					<br/>
+					<div class="row">
+						<div class="col-md-4">
+							<div class="form-group">
+								<label for="nomM">Nom :</label> <input type="text"
+									class="form-control" id="nomM" name="nomM" ng-model="nomM"
+									required /> <span
+									ng-show="modifContactForm.nomM.$dirty && modifContactForm.nomM.$error.required"
+									style="color: red">Veuillez saisir votre nom !</span>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label for="prenomM">Prénom :</label> <input type="text"
+									class="form-control" id="prenomM" name="prenomM"
+									ng-model="prenomM" required /> <span
+									ng-show="modifContactForm.prenomM.$dirty && modifContactForm.prenomM.$error.required"
+									style="color: red">Veuillez saisir votre prénom !</span>
+							</div>
+						</div>
+						<br/>
+						<div class="col-md-4">
+							<div class="input-group">
+								<span class="input-group-addon glyphicon glyphicon-envelope"></span><input
+									type="email" class="form-control" id="mailM" name="mailM" placeholder="E-mail"
+									ng-model="mailM" required /> <span
+									ng-show="modifContactForm.mailM.$dirty && modifContactForm.mailM.$error.required"
+									style="color: red">Veuillez saisir votre e-mail !</span>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4">
+							<div class="input-group">
+								<span class="input-group-addon glyphicon glyphicon-home"></span><input type="text"
+									class="form-control" id="adresseM" name="adresseM" placeholder="Adresse" ng-model="adresseM"
+									required /> <span
+									ng-show="modifContactForm.adresseM.$dirty && modifContactForm.adresseM.$error.required"
+									style="color: red">Veuillez saisir votre adresse !</span>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="input-group">
+								<span class="input-group-addon glyphicon glyphicon-phone"></span><input type="text"
+									class="form-control" id="telM" name="telM" placeholder="Numéro de téléphone"
+									ng-model="telM" required /> <span
+									ng-show="modifContactForm.telM.$dirty && modifContactForm.telM.$error.required"
+									style="color: red">Veuillez saisir votre numéro de téléphone !</span>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="input-group">
+								<span class="input-group-addon glyphicon glyphicon-globe"></span><input
+									type="text" class="form-control" id="siteWebM" name="siteWebM" placeholder="Site Web"
+									ng-model="siteWebM" required /> <span
+									ng-show="modifContactForm.siteWebM.$dirty && modifContactForm.siteWebM.$error.required"
+									style="color: red">Veuillez saisir votre site Web !</span>
+							</div>
+						</div>
+					</div>
+					<br/>
+					<div class="row">
+						<div class="col-md-12 text-center">
+							<input type="submit" value="Modifier" class="btn btn-success"
+								ng-disabled="modifContactForm.$invalid" />
+						</div>
+					</div>
+					<br/>
+				</form>
+			</div>
+		</div>
+		<div class="table-responsive">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Noms :</th>
+						<th>Prénoms :</th>
+						<th>E-mails :</th>
+						<th>Adresses :</th>
+						<th>Nums Tél :</th>
+						<th>Sites Web :</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="utilisateur in utilisateurs">
+						<td>{[{utilisateur.id}]}</td>
+						<td>{[{utilisateur.nom}]}</td>
+						<td>{[{utilisateur.prenom}]}</td>
+						<td>{[{utilisateur.mail}]}</td>
+						<td>{[{utilisateur.adresse}]}</td>
+						<td>{[{utilisateur.tel}]}</td>
+						<td>{[{utilisateur.siteWeb}]}</td>
+						<td><button class="btn btn-primary"
+								ng-click="selectionner (utilisateur.id)">Modifier</button></td>
+						<td><button class="btn btn-danger"
+								ng-click="supprimer (utilisateur.id)">Supprimer</button></td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<footer class="text-center navbar-inverse navbar-static-bottom">
+		<p style="color : white ; font-weight : bold">&copy; Hamza ESSID @ <a href="/login">Appartoo</a></p>
+	</footer>
+	<script type="text/javascript" src="assets/js/jquery.min.js"></script>
+	<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="assets/js/angular.min.js"></script>
+	<script type="text/javascript" src="assets/js/app.js"></script>
+</body>
+</html>
